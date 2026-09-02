@@ -13,6 +13,12 @@ const Recipe = require('./models/Recipe')
 
  const id = '6a9847c7d0eef31d63e37b92'
 
+  const newRecipeData = {
+  name: "Charcoal Cake",
+  instructions: "bake at 280C",
+  prepTime: 10,
+  difficulty: "Easy"
+ }
 
 // functions
 async function connectToDB(){ //connection to the database
@@ -63,4 +69,15 @@ async function getRecipeById(id) {
 
 // getRecipeById(id)
 
+async function updateRecipe(recipeId, newRecipeData) {
+    try {
+    const recipeUpdated = await Recipe.findByIdAndUpdate(recipeId, newRecipeData, {new:true})
+    console.log(recipeUpdated);
+    console.log('Recipe has been updated successfuly');
+    }
+    catch (error) {
+        console.log('Error: Recipe did not update');
+    }
+}
 
+updateRecipe(id, newRecipeData)
